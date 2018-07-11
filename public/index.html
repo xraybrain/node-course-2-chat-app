@@ -9,15 +9,6 @@
     <p>Welcome to chat app</p>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io(); // this is used to listen for data from the server and to send data to the server
-        socket.on('connect', ()=>{
-            console.log('Connected to server');
-        }); // registers the 'connection' event. (event listener)
-
-        socket.on('disconnect', () => {
-            console.log('Disconnected from server');
-        });
-    </script>
+    <script src="/js/index.js"></script>
 </body>
 </html>
