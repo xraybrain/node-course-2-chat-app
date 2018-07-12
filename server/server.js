@@ -27,11 +27,11 @@ io.on('connection', (socket) => {
 
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
 
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', (message, callback) => { // adding acknowledgement
         console.log('createMessage', message);
         
         io.emit('newMessage', generateMessage(message.from, message.text)); // this emits the event to every single connection
-
+        callback('This is from the server.'); // this sends an event to the front end 
         // socket.broadcast.emit('newMessage',{
         //     from: message.from,
         //     text: message.text,
