@@ -17,7 +17,10 @@ app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
     console.log('New user connected');
-
+    var rooms = users.getRoomList();
+    if(rooms.length > 0){
+        socket.emit('activeRooms', rooms);
+    }
     // socket.emit('newMessage', {
     //     from: 'Juliet',
     //     text: 'How are you? dear.',
@@ -29,6 +32,13 @@ io.on('connection', (socket) => {
     socket.on('join', (params, callback) => {
         if(!isRealString(params.name) || !isRealString(params.room)){
             return callback('Name and room name are required.')
+        }
+
+        var userName = users.getUserList(params.room).filter((name)=>name === params.name);
+        
+        
+        if(userName.length >= 1){
+            return callback('UserName already taken by another user in this  room.');
         }
         socket.join(params.room); // this is use to join a room so others in other rooms won't see your message
         users.removeUser(socket.id);

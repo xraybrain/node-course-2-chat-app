@@ -42,6 +42,14 @@ class Users {
 
         return namesArray;
     }
+
+    getRoomList () {
+        var rooms = []
+        this.users.forEach(user => {
+            rooms.push(user.room)
+        });
+        return rooms;
+    }
 }
 
 module.exports = {Users};
