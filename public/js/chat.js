@@ -109,7 +109,7 @@ jQuery('#message-form').on('submit', function(e){
 
     socket.emit('createMessage', {
         text: messageTextBox.val(), 
-    }, () =>{
+    }, function () {
         messageTextBox.val('')
     });
 });
@@ -131,9 +131,11 @@ locationButton.on('click', function () {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
         });
-    }, function (){
+    }, function (err){
         // this gets executed when the getCurrentPosition has an error
-        alert('Unable to fetch location');
+        alert('Unable to fetch location ' + err.message);
+        console.log(err.message);
+        
 
         locationButton.removeAttr('disabled').text('Send location');
     }); // this gets the coordinates for the user
