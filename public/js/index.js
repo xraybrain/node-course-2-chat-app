@@ -15,3 +15,8 @@ socket.on('activeRooms', function(rooms){
         select.append(opt);
     });
 });
+
+// change the protocol if the user access the page through unsecure server
+if(window.location.protocol === 'http:' && window.location.hostname !== 'localhost'){
+    window.location.protocol = 'https:';
+}
